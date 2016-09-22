@@ -1,0 +1,12 @@
+#form-area {
+    height: 120px;
+    font-size: 25px;
+    margin: 50px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#form-area dt {
+    text-align: left;
+}

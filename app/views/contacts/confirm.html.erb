@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+  		<h3 class="text-left">以下の内容で、送信する。</h3>
+		<%= form_for(@contact) do |f| %>
+			<%= f.hidden_field :name %>
+			<%= f.hidden_field :email %>
+			<%= f.hidden_field :content %>
+		<dl id="form-area" class="dl-horizontal">
+
+			<dt>名前</dt>
+			<dd class="text-left"><%= @contact.name %></dd>
+			<dt>Email</dt>
+			<dd class="text-left"><%= @contact.email %></dd>
+			<dt>本文</dt>
+			<dd class="text-left"><%= @contact.content %></dd>
+		</dl>
+		<div class="row">
+			<div class="col-sm-6">
+			<%= f.submit '送信', class: 'btn btn-primary btn-block' %>
+			</div>
+		<% end %>
+		<%= form_for(@contact, url: new_contact_path, method: 'get') do |f| %>
+			<%= f.hidden_field :name %>
+			<%= f.hidden_field :email %>
+			<%= f.hidden_field :content %>
+			<div class="col-sm-6">
+			<%= f.submit '戻る', name: 'back', class: 'btn btn-default btn-block col-sm-6' %>
+			</div>
+		<% end %>
+		</div>
+	</div>
+</div>
