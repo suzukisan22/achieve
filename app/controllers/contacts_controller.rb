@@ -3,25 +3,26 @@ class ContactsController < ApplicationController
 	end
 
   def new
-		if params[:back]
-			@contact = Contact.new(contacts_params)
-		else
-			@contact = Contact.new
-		end
+  	if params[:back]
+  	  @contact = Contact.new(contacts_params)
+  	else
+  	  @contact = Contact.new
+  	end
   end
 
 	def confirm
-		@contact = Contact.new(contacts_params)
-		render :new if @contact.invalid?
+	  @contact = Contact.new(contacts_params)
+	  render :new if @contact.invalid?
 	end
 
 	def create
-		@contact = Contact.new(contacts_params)
-		if @contact.save 
-			redirect_to root_path, notice: 'お問い合わせありがとうございました!'
-		else
-			render action: 'new'
-		end
+	  @contact = Contact.new(contacts_params)
+	  if @contact.save
+	  	redirect_to root_path, notice: 'お問い合わせありがとうございました!'
+	  	NoticeMailer.sendmail_contact(@contact).deliver
+	  else
+	  	render action: 'new'
+	  end
 	end
 
 	private
