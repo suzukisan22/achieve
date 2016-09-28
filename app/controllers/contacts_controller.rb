@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   def index
-	end
+  end
 
   def new
   	if params[:back]
