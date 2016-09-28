@@ -56,4 +56,5 @@ class User < ActiveRecord::Base
       update_without_password(params, *options)
     end
   end
+  
 end
