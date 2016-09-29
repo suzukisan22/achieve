@@ -3,12 +3,12 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: [:edit, :update, :destroy]
 
   def index
-  	@blogs = Blog.all
+  	@blogs = Blog.order(created_at: :desc)
   	@users = User.all
   end
 
   def new
-    if params[:back]
+  	if params[:back]
         @blog = Blog.new(blogs_params)
     else
         @blog = Blog.new

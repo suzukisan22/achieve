@@ -5,14 +5,14 @@ class ContactsController < ApplicationController
   def new
     if params[:back]
   	  @contact = Contact.new(contacts_params)
-  	else
+    else
   	  @contact = Contact.new
-  	end
+    end
   end
 
   def confirm
     @contact = Contact.new(contacts_params)
-	render :new if @contact.invalid?
+	  render :new if @contact.invalid?
   end
 
   def create
