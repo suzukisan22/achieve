@@ -8,7 +8,9 @@
       <%= link_to "ブログを作成する", new_blog_path, class: 'btn btn-default' %>
     <% @blogs.each do |blog| %>
     <div class="row">
-      <h4><strong><%= blog.title %></strong></h4>
+      <%= link_to blog_path(blog) do %>
+        <h4><strong><%= blog.title %></strong></h4>
+      <% end %>
       <% @users.each do |user| %>
         <% if user.id == blog.user_id %>
           <p class="feed_image">

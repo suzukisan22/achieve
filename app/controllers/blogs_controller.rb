@@ -1,10 +1,15 @@
 class BlogsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_blog, only: [:edit, :update, :destroy]
+  before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
   def index
   	@blogs = Blog.order(created_at: :desc)
   	@users = User.all
+  end
+
+  def show
+    @comment = @blog.comments.build
+    @comments = @blog.comments
   end
 
   def new
@@ -12,7 +17,7 @@ class BlogsController < ApplicationController
         @blog = Blog.new(blogs_params)
     else
         @blog = Blog.new
-	end
+	  end
   end
 
 	def confirm
@@ -31,13 +36,13 @@ class BlogsController < ApplicationController
     end
 	end
 
-	
+
 	def edit
 		@blog = Blog.find(params[:id])
 	end
 
 	def update
-		@blog = Blog.find(params[:id]) 
+		@blog = Blog.find(params[:id])
 		if @blog.update(blogs_params)
 			redirect_to blogs_path, notice: "ブログを編集しました!"
 		else
@@ -55,7 +60,7 @@ class BlogsController < ApplicationController
     def blogs_params
       params.require(:blog).permit(:title, :content)
     end
-    
+
     def set_blog
       @blog = Blog.find(params[:id])
     end
