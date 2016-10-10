@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   # CommentモデルのAssociationを設定
   has_many :comments, dependent: :destroy
 
+  has_many :tasks, dependent: :destroy
+
   # usersテーブルのidカラムと参照関係を持つカラムを「follower_id」カラムであると定義する
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
