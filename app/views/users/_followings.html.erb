@@ -1,11 +1,13 @@
 <div class="text-center">
   <h3>フォロー中</h3>
 </div>
-<% @followings.each do |following| %>
-  <div class="col-xs-6">
-    <%= link_to user_path(following.id) do %>
-      <%= profile_img(following) %><br>
-      <%= following.email %>
-    <% end %>
-  </div>
-<% end %>
+<div class="user-container row">
+  <% @followings.each do |following| %>
+    <div class="col-xs-6 user-area">
+      <%= link_to user_path(following.id) do %>
+        <%= profile_img(following) %><br>
+        <%= following.email %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
