@@ -1,0 +1,11 @@
+<div class="col-xs-10 col-xs-offset-1">
+  <h1><%= "#{@user.name}詳細ページ" %></h1>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= render "followings", followings: @followings %>
+    </div>
+    <div class="col-sm-6">
+      <%= render "followers", followers: @followers %>
+    </div>
+  </div>
+</div>

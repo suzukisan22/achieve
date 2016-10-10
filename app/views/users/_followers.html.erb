@@ -1,0 +1,11 @@
+<div class="text-center">
+  <h3>フォローワー</h3>
+</div>
+<% @followers.each do |follower| %>
+  <div class="col-xs-6">
+    <%= link_to user_path(follower.id) do %>
+      <%= profile_img(follower) %><br>
+      <%= follower.email %>
+    <% end %>
+  </div>
+<% end %>
