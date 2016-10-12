@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'relationships/create'
-
-  get 'relationships/destroy'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -11,8 +8,16 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
 }
 
-  resources :users, only: [:index, :show, :edit, :update] do
+  resources :users, only: [:index] do
     resources :tasks
+    resources :submit_requests , shallow: true do
+      get 'approve'
+      get 'unapprove'
+      get 'reject'
+      collection do
+        get 'inbox'
+      end
+    end
   end
 
   resources :relationships, only: [:create, :destroy]
