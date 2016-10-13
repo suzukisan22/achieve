@@ -24,7 +24,7 @@ class SubmitRequestsController < ApplicationController
     respond_to do |format|
       if @submit_request.save
         @submit_request.task.update(status: 1)
-        format.html { redirect_to user_submit_requests_path(current_user.id,@submit_request), notice: '依頼を送信しました。' }
+        format.html { redirect_to user_submit_requests_path(current_user.id), notice: '依頼を送信しました。' }
         format.json { render :show, status: :created, location: @submit_request }
       else
         format.html { render :new }
@@ -64,6 +64,7 @@ class SubmitRequestsController < ApplicationController
     @submit_request.task.update(status: 2)
     @submit_requests = SubmitRequest.where(charge_id: current_user.id).order(updated_at: :desc)
     respond_to do |format|
+      format.html { redirect_to inbox_user_submit_requests_path(current_user.id), notice: '承認しました。' }
       format.js { render :reaction_inbox }
     end
   end
