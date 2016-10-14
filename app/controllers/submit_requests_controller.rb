@@ -57,6 +57,10 @@ class SubmitRequestsController < ApplicationController
   end
 
   def destroy
+    @submit_request.destroy
+    respond_to do |format|
+      format.js { render :reaction_index }
+    end
   end
 
   def approve
@@ -74,11 +78,18 @@ class SubmitRequestsController < ApplicationController
     @submit_request.task.update(status: 9, charge_id: @submit_request.user_id)
     @submit_requests = SubmitRequest.where(charge_id: current_user.id).order(updated_at: :desc)
     respond_to do |format|
+      format.html { redirect_to inbox_user_submit_requests_path(current_user.id), notice: '却下しました。' }
       format.js { render :reaction_inbox }
     end
   end
 
   def reject
+    @submit_request.update(status: 8)
+    @submit_request.task.update(status: 8, charge_id: current_user.id)
+    @submit_requests = SubmitRequest.where(charge_id: current_user.id).order(updated_at: :desc)
+    respond_to do |format|
+      format.js { render :reaction_inbox }
+    end
   end
 
   def inbox
