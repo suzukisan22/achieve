@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   devise_for :users, controllers: {
@@ -18,6 +17,10 @@ Rails.application.routes.draw do
         get 'inbox'
       end
     end
+  end
+
+  resources :conversations do
+    resources :messages
   end
 
   resources :relationships, only: [:create, :destroy]
