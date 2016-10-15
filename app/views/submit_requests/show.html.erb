@@ -1,2 +1,4 @@
-<h1>SubmitRequests#show</h1>
-<p>Find me in app/views/submit_requests/show.html.erb</p>
+<h1>メッセージ</h1>
+<p>登録者 : <%= @submit_request.user.name %></p>
+<p>タイトル : <%= @submit_request.task.title %></p>
+<p class="not-overflow">メッセージ : <%= @submit_request.message %></p>
