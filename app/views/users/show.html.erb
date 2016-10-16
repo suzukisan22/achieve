@@ -1,5 +1,11 @@
 <div class="col-xs-10 col-xs-offset-1 mb50">
-  <h1><%= "#{@user.name}詳細ページ" %></h1>
+  <h1>
+  <% if @user.name %>
+    <%= "#{@user.name} 詳細ページ" %>
+  <% else %>
+    <%= "No_name 詳細ページ" %>
+  <% end %>
+  </h1>
   <div class="row">
     <div class="col-sm-6">
       <%= render "followings", followings: @followings %>
@@ -7,5 +13,21 @@
     <div class="col-sm-6">
       <%= render "followers", followers: @followers %>
     </div>
+  </div>
+  <div class="conversation-area">
+    <table class="table table-hover mb50">
+      <thead>
+        <h2>メッセージ一覧</h2>
+      </thead>
+      <tbody>
+          <% @conversations.each do |conv| %>
+            <tr>
+              <td>
+                <%= link_to conv.target_user(@user).name, conversation_messages_path(conv) %>
+              </td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -89,4 +89,13 @@ class User < ActiveRecord::Base
     followers & followed_users
   end
 
+  #メッセージ履歴があるユーザーの表示
+  def target_user(current_user)
+    if sender_id == current_user.id
+      User.find(recipient_id)
+    elsif recipient_id == current_user.id
+      User.find(sender_id)
+    end
+  end
+
 end
