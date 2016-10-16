@@ -7,16 +7,18 @@
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
-  <script>
-    var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',{
-      encrypted: true
-    });
+  <% if user_signed_in? %>
+    <script>
+      var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',{
+        encrypted: true
+      });
 
-    var channel = pusher.subscribe('test_channel');
-    channel.bind('comment_created', function(data) {
-      alert(data.message);
-    });
-  </script>
+      var channel = pusher.subscribe("user_<%= current_user.id %>_channel");
+      channel.bind('comment_created', function(data) {
+        alert(data.message);
+      });
+    </script>
+  <% end %>
 </head>
 <body>
   <header>
