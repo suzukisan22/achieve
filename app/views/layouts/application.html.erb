@@ -6,9 +6,19 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+  <script>
+    var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',{
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('test_channel');
+    channel.bind('comment_created', function(data) {
+      alert(data.message);
+    });
+  </script>
 </head>
 <body>
-
   <header>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
