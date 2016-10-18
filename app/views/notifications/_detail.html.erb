@@ -1,0 +1,13 @@
+<% notifications.each do |notification| %>
+<hr>
+  <%= link_to blog_path(notification.comment.blog, notification_id: notification.id) do %>
+  <li>
+    <span class="btn btn-warning"><%= is_read(notification) %></span>
+    <p>
+      <%= notification.comment.user.try(:name) %>さんが
+      あなたのブログ（<%= notification.comment.blog.title %>）にコメントしました。
+    </p>
+    <p><%= notification.created_at %></p>
+  </li>
+  <% end %>
+<% end %>

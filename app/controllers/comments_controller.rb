@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
           })
         end
         Pusher.trigger("user_#{@comment.blog.user_id}_channel", 'notification_created', {
-          uncreate_count: Notification.where(user_id: @comment.blog.user.id).count
+          unread_count: Notification.where("user_id = ? and read = ?", @comment.blog.user.id, false).count
         })
       else
         format.html { render :new }
