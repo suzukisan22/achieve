@@ -57,6 +57,9 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
+
+  gem "rspec-rails"
+  gem "factory_girl_rails"
 end
 
 gem 'twitter-bootstrap-rails'
@@ -75,6 +78,8 @@ group :development do
   gem 'letter_opener_web'
 
   gem 'dotenv-rails'
+
+  gem 'web-console', '~> 2.0'
 end
 
 gem 'therubyracer', platforms: :ruby
@@ -100,3 +105,10 @@ gem 'fog'
 gem 'dotenv-rails'
 
 gem 'unicorn'
+
+group :test do
+  gem "capybara"
+  gem "database_cleaner"
+  gem "launchy"
+  gem "selenium-webdriver"
+end
